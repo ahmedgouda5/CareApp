@@ -13,7 +13,7 @@ interface NavItem {
 const Navbar = () => {
   const { pathname } = useLocation();
 
-  const currentPage: NavItem = nav.sections
+  const currentPage: NavItem | undefined = nav.sections
     .flatMap((section) => section.items)
     .find((item) => item.url === pathname);
 

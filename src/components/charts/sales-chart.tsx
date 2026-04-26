@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import {
   Area,
   AreaChart,
@@ -27,6 +26,7 @@ import {
   ChartTooltipContent,
 } from "../ui/chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import { useId, useState } from "react";
 
 type SalesRange = "7D" | "1M" | "1Y";
 
@@ -168,8 +168,8 @@ export function SalesChart({
   subtitle = "Revenue & Orders - April 2026",
   data = defaultSalesData,
 }: SalesChartProps) {
-  const [range, setRange] = React.useState<SalesRange>("7D");
-  const gradientId = React.useId().replace(/:/g, "");
+  const [range, setRange] = useState<SalesRange>("7D");
+  const gradientId = useId().replace(/:/g, "");
 
   return (
     <Card className="rounded-xl bg-muted/50 shadow-sm">

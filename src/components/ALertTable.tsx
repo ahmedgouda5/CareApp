@@ -22,9 +22,20 @@ const alerts = [
     message: "19 units remaining",
     status: "Low",
   },
-];
+] as const;
 
-const statusStyles = {
+type AlertStatus = (typeof alerts)[number]["status"];
+
+const statusStyles: Record<
+  AlertStatus,
+  {
+    card: string;
+    badge: string;
+    text: string;
+    iconBg: string;
+    iconColor: string;
+  }
+> = {
   Critical: {
     card: "border-red-200 bg-red-50",
     badge: "bg-red-100 text-red-600",

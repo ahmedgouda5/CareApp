@@ -73,9 +73,11 @@ const orders = [
     status: "Processing",
     time: "2h ago",
   },
-];
+] as const;
 
-const statusStyles = {
+type OrderStatus = (typeof orders)[number]["status"];
+
+const statusStyles: Record<OrderStatus, string> = {
   Completed: "bg-green-100 text-green-600",
   Pending: "bg-yellow-100 text-yellow-600",
   Cancelled: "bg-red-100 text-red-600",
