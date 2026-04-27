@@ -1,30 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
 
 export interface ProductState {
-  value: number;
+  Product: {
+    name: string;
+    description: string;
+    sku: string;
+    category: string;
+    price: number;
+    stock: number;
+    expiry: string;
+    status: string;
+  }[];
 }
 
 const initialState: ProductState = {
-  value: 0,
+  Product: [],
 };
 
 export const ProductSlice = createSlice({
   name: "Product",
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    AddProduct: (state, action) => {
+      state.Product.push(action.payload);
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = ProductSlice.actions;
+export const { AddProduct } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

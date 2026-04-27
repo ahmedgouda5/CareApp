@@ -37,7 +37,6 @@ export const schema = z.object({
 });
 
 type Product = z.infer<typeof schema>;
-type NewProduct = Omit<Product, "id">;
 
 const initialData: Product[] = [
   {
@@ -154,7 +153,6 @@ const columns: ColumnDef<Product>[] = [
     header: "PRODUCT NAME",
     cell: ({ row }) => (
       <div className="flex gap-3 items-center">
-        <div className="w-10 h-10 bg-gray-200 rounded-lg" />
         <div>
           <p className="font-medium">{row.original.name}</p>
           <p className="text-xs text-gray-500">{row.original.description}</p>
@@ -223,14 +221,7 @@ const columns: ColumnDef<Product>[] = [
 ];
 
 export function ProductsTable() {
-  const [data, setData] = React.useState(initialData);
-
-  const handleAddProduct = React.useCallback((product: NewProduct) => {
-    setData((prev) => {
-      const nextId = prev.length > 0 ? Math.max(...prev.map((item) => item.id)) + 1 : 1;
-      return [{ id: nextId, ...product }, ...prev];
-    });
-  }, []);
+  const [data] = React.useState(initialData);
 
   const table = useReactTable({
     data,
@@ -247,7 +238,7 @@ export function ProductsTable() {
             <p className="text-gray-500">1,284 products in catalog</p>
           </div>
           <div>
-            <AddingProductModel onAddProduct={handleAddProduct} />
+            <AddingProductModel />
           </div>
         </section>
       </nav>

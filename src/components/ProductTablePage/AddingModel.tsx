@@ -1,10 +1,8 @@
 "use client";
 
-import * as React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -23,15 +21,19 @@ import {
   categoryOptions,
   statusOptions,
 } from "../../Schemas/Prodcut-Schema";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../../../store/store";
+import { AddProduct } from "../../../store/Slices/Product.slice";
+import { useCallback, useState } from "react";
 
 type AddProductFormValues = z.infer<typeof addProductSchema>;
 
-interface AddingProductModelProps {
-  onAddProduct: (product: AddProductFormValues) => void;
-}
-
-export function AddingProductModel({ onAddProduct }: AddingProductModelProps) {
-  const [open, setOpen] = React.useState(false);
+export function AddingProductModel() {
+  const dispatch = useDispatch<AppDispatch>();
+  const Product = useSelector((state: RootState) => state.Product.Product);
+  console.log("from redux", Product);
+  const [open, setOpen] = useState<boolean>(false);
 
   const {
     register,
@@ -52,12 +54,11 @@ export function AddingProductModel({ onAddProduct }: AddingProductModelProps) {
     },
   });
 
-  const onSubmit = (values: AddProductFormValues) => {
-    console.log(values);
-    onAddProduct(values);
+  const onSubmit = useCallback((values: AddProductFormValues) => {
+    dispatch(AddProduct(values));
     reset();
     setOpen(false);
-  };
+  }, []);
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
