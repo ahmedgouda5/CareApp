@@ -1,177 +1,318 @@
 # 💊 PharmaCare Pro — Pharmacy Management System
 
-A modern, single-file pharmacy management dashboard built with vanilla HTML, CSS, and JavaScript. No frameworks, no build tools — just open and run.
-
----
-
-## 🖥️ Preview
-
-> Multi-page SPA-style dashboard with a dark navy sidebar, responsive stat cards, interactive charts, and full modal workflows for every entity.
-
----
-
-## ✨ Features
-
-### 📊 Dashboard
-- KPI stat cards: Daily Revenue, Total Orders, Low Stock alerts, Active Patients
-- Weekly sales & orders line chart (dual Y-axis)
-- Category sales breakdown via doughnut chart
-- Recent orders table with status badges
-- Low stock alerts panel
-
-### 💊 Products
-- Full product catalog table with search
-- Stock level indicators & expiry date tracking
-- Add/Edit product modal with category, supplier, pricing, and stock fields
-
-### 🛒 Orders
-- Order list with status tracking (Pending, Processing, Completed, Cancelled)
-- Order detail modal with line items and totals
-- Print receipt & reorder actions
-
-### 👥 Customers
-- Patient profiles with purchase history
-- Customer detail view
-
-### 📦 Inventory
-- Stock level monitoring
-- Expiry date tracking with warning badges
-- Inventory adjustment workflows
-
-### 🏭 Suppliers
-- Supplier directory with contact info, lead times, and payment terms
-- Add Supplier modal (company, contact, country, specialization, payment terms)
-
-### 📈 Reports & Analytics
-- Monthly revenue chart (current year vs last year comparison)
-- Sales performance metrics
-
-### 🔐 Authentication
-- Login & Register page previews
-
-### ⚙️ Settings
-- Account & pharmacy preferences UI
+A modern, full-featured pharmacy management dashboard built with **React 19**, **TypeScript**, **Vite**, and a carefully selected UI/state stack. Converted from a static HTML prototype into a scalable, component-driven SPA.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Markup | HTML5 |
-| Styling | Pure CSS (custom properties, grid, flexbox) |
-| Logic | Vanilla JavaScript (ES6+) |
-| Charts | [Chart.js 4.4.1](https://www.chartjs.org/) via CDN |
-| Fonts | Google Fonts — Outfit + DM Sans |
-
-> **No build step. No dependencies to install. Zero config.**
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | React 19 | UI rendering |
+| Language | TypeScript 6 | Type safety |
+| Bundler | Vite 8 | Dev server & build |
+| Routing | React Router DOM v7 | SPA navigation |
+| State | Redux Toolkit v2 | Global app state |
+| Forms | React Hook Form + Zod (via resolvers) | Form handling & validation |
+| Tables | TanStack Table v8 | Sortable, filterable data grids |
+| Charts | Recharts v3 | Revenue, sales & analytics charts |
+| UI Primitives | Radix UI | Accessible unstyled components |
+| Component Library | shadcn/ui | Pre-built Radix-based components |
+| Styling | Tailwind CSS v4 | Utility-first CSS |
+| Styling Utils | clsx + tailwind-merge + CVA | Conditional class management |
+| Drag & Drop | @dnd-kit/core + sortable | Inventory reordering |
+| Icons | Lucide React + Tabler Icons | Icon sets |
+| Fonts | Geist Variable (@fontsource-variable) | Typography |
+| Animations | tw-animate-css | Tailwind animation utilities |
 
 ---
 
 ## 🚀 Getting Started
 
-### Option 1 — Open directly
+### Prerequisites
+- Node.js >= 18
+- npm / yarn / pnpm
+
+### Installation
+
 ```bash
-# Just double-click the file, or:
-open pharmacy-management-system.html
+git clone https://github.com/your-username/careapp.git
+cd careapp
+npm install
 ```
 
-### Option 2 — Serve locally (recommended for production-like testing)
+### Development
+
 ```bash
-# Using Python
-python -m http.server 8080
-
-# Using Node.js (npx)
-npx serve .
-
-# Using VS Code
-# Install "Live Server" extension → right-click the file → Open with Live Server
+npm run dev
+# → http://localhost:5173
 ```
 
-Then visit `http://localhost:8080/pharmacy-management-system.html`.
+### Build for Production
+
+```bash
+npm run build        # type-check + bundle
+npm run preview      # preview production build locally
+```
+
+### Lint
+
+```bash
+npm run lint
+```
 
 ---
 
 ## 📁 Project Structure
 
 ```
-pharmacy-management-system.html
+careapp/
+├── public/
+├── src/
+│   ├── app/
+│   │   └── store.ts                  # Redux store setup
+│   │
+│   ├── assets/
+│   │
+│   ├── components/
+│   │   ├── ui/                       # shadcn/ui base components (Button, Input, Dialog…)
+│   │   ├── layout/
+│   │   │   ├── Sidebar.tsx
+│   │   │   ├── Topbar.tsx
+│   │   │   └── AppLayout.tsx
+│   │   ├── charts/
+│   │   │   ├── SalesChart.tsx        # Recharts line chart
+│   │   │   └── CategoryDonut.tsx     # Recharts doughnut chart
+│   │   └── shared/
+│   │       ├── StatCard.tsx
+│   │       ├── DataTable.tsx         # TanStack Table wrapper
+│   │       └── Badge.tsx
+│   │
+│   ├── features/
+│   │   ├── dashboard/
+│   │   │   ├── DashboardPage.tsx
+│   │   │   └── dashboardSlice.ts
+│   │   ├── products/
+│   │   │   ├── ProductsPage.tsx
+│   │   │   ├── ProductModal.tsx
+│   │   │   └── productsSlice.ts
+│   │   ├── orders/
+│   │   │   ├── OrdersPage.tsx
+│   │   │   ├── OrderDetailModal.tsx
+│   │   │   └── ordersSlice.ts
+│   │   ├── customers/
+│   │   ├── inventory/
+│   │   ├── suppliers/
+│   │   ├── reports/
+│   │   └── settings/
+│   │
+│   ├── hooks/
+│   │   ├── useAppDispatch.ts
+│   │   └── useAppSelector.ts
+│   │
+│   ├── types/
+│   │   ├── product.ts
+│   │   ├── order.ts
+│   │   └── supplier.ts
+│   │
+│   ├── lib/
+│   │   └── utils.ts                  # cn() helper (clsx + twMerge)
+│   │
+│   ├── router/
+│   │   └── index.tsx                 # React Router v7 routes
+│   │
+│   ├── main.tsx
+│   └── index.css                     # Tailwind v4 directives + CSS variables
 │
-├── <style>          # All CSS (CSS custom properties, layout, components)
-│   ├── Layout       # Sidebar, topbar, main content area
-│   ├── Components   # Cards, tables, badges, buttons, modals, forms
-│   └── Pages        # Page-specific styles (dashboard, reports, etc.)
-│
-├── <body>           # All HTML markup
-│   ├── .sidebar     # Navigation with section grouping + user card
-│   ├── .main        # Topbar + page content areas
-│   └── Modals       # addProduct, productDetail, orderDetail, addSupplier
-│
-└── <script>         # All JavaScript
-    ├── navigate()   # SPA-style page switching
-    ├── openModal()  # Modal open/close logic
-    ├── initCharts() # Dashboard charts (lazy-initialized)
-    └── initReportCharts() # Reports charts (lazy-initialized)
+├── components.json                   # shadcn/ui config
+├── vite.config.ts
+├── tsconfig.json
+└── package.json
 ```
 
 ---
 
-## 🎨 Design System
+## 🗺️ Pages & Routes
 
-All design tokens are defined as CSS custom properties on `:root`:
-
-```css
---navy: #0A1628         /* Sidebar background */
---emerald: #059669      /* Primary brand color */
---gold: #C9961A         /* Secondary accent */
---danger: #dc2626       /* Alerts & low stock */
---font-main: 'Outfit'   /* Headings & labels */
---font-body: 'DM Sans'  /* Body text */
-```
-
----
-
-## 📌 Pages
-
-| Page | Route Trigger | Description |
+| Route | Page | Description |
 |---|---|---|
-| Dashboard | Default | KPIs + charts + recent activity |
-| Products | `navigate('products')` | Catalog management |
-| Orders | `navigate('orders')` | Order tracking |
-| Customers | `navigate('customers')` | Patient profiles |
-| Inventory | `navigate('inventory')` | Stock & expiry |
-| Suppliers | `navigate('suppliers')` | Supplier directory |
-| Reports | `navigate('reports')` | Analytics & charts |
-| Auth | `navigate('auth')` | Login / Register preview |
-| Settings | `navigate('settings')` | Preferences |
+| `/` | Dashboard | KPI cards, charts, recent orders |
+| `/products` | Products | Catalog table, add/edit modals |
+| `/orders` | Orders | Order list, status tracking, receipt |
+| `/customers` | Customers | Patient profiles & purchase history |
+| `/inventory` | Inventory | Stock levels & expiry tracking |
+| `/suppliers` | Suppliers | Supplier directory & management |
+| `/reports` | Reports | Revenue analytics & comparisons |
+| `/settings` | Settings | Account & pharmacy preferences |
+| `/auth/login` | Login | Authentication page |
+| `/auth/register` | Register | Registration page |
 
 ---
 
-## ⚡ Extending the Project
+## 🏗️ Key Patterns
 
-To add a new page:
+### State — Redux Toolkit slice
 
-1. Add a nav item in `.sidebar-nav`
-2. Add a `<div class="page" id="pg-newpage">` in the body
-3. Register it in the `pageMeta` object in the script
-4. Call `navigate('newpage', navEl)` from the nav item's `onclick`
+```ts
+// src/features/products/productsSlice.ts
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { Product } from '@/types/product';
 
-To connect real data, replace the static HTML table rows with a `fetch()` call and render dynamically:
+interface ProductsState {
+  items: Product[];
+  loading: boolean;
+}
 
-```javascript
-async function loadProducts() {
-  const res = await fetch('/api/products');
-  const products = await res.json();
-  const tbody = document.querySelector('#products-table tbody');
-  tbody.innerHTML = products.map(p => `
-    <tr>
-      <td>${p.name}</td>
-      <td>${p.category}</td>
-      <td>${p.stock}</td>
-    </tr>
-  `).join('');
+const initialState: ProductsState = { items: [], loading: false };
+
+export const productsSlice = createSlice({
+  name: 'products',
+  initialState,
+  reducers: {
+    setProducts: (state, action: PayloadAction<Product[]>) => {
+      state.items = action.payload;
+    },
+  },
+});
+
+export const { setProducts } = productsSlice.actions;
+export default productsSlice.reducer;
+```
+
+### Tables — TanStack Table v8
+
+```tsx
+// src/components/shared/DataTable.tsx
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+  flexRender,
+  type ColumnDef,
+} from '@tanstack/react-table';
+
+interface DataTableProps<TData> {
+  columns: ColumnDef<TData>[];
+  data: TData[];
+}
+
+export function DataTable<TData>({ columns, data }: DataTableProps<TData>) {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+  });
+
+  return (
+    <table>
+      <thead>
+        {table.getHeaderGroups().map(hg => (
+          <tr key={hg.id}>
+            {hg.headers.map(h => (
+              <th key={h.id} onClick={h.column.getToggleSortingHandler()}>
+                {flexRender(h.column.columnDef.header, h.getContext())}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody>
+        {table.getRowModel().rows.map(row => (
+          <tr key={row.id}>
+            {row.getVisibleCells().map(cell => (
+              <td key={cell.id}>
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 }
 ```
+
+### Forms — React Hook Form + Zod
+
+```tsx
+// src/features/products/ProductModal.tsx
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  name: z.string().min(2, 'Name is required'),
+  stock: z.number().min(0),
+  price: z.number().positive(),
+  category: z.string(),
+});
+
+type ProductForm = z.infer<typeof schema>;
+
+export function ProductModal() {
+  const { register, handleSubmit, formState: { errors } } = useForm<ProductForm>({
+    resolver: zodResolver(schema),
+  });
+
+  const onSubmit = (data: ProductForm) => {
+    // dispatch to Redux or call API
+    console.log(data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('name')} placeholder="Product name" />
+      {errors.name && <span className="text-red-500">{errors.name.message}</span>}
+    </form>
+  );
+}
+```
+
+### Styling — cn() utility
+
+```ts
+// src/lib/utils.ts
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+// Usage in components:
+// <div className={cn('px-4 py-2', isActive && 'bg-emerald-600', className)} />
+```
+
+---
+
+## 🎨 Design Tokens
+
+Defined as CSS custom properties in `src/index.css`:
+
+```css
+:root {
+  --navy:          #0A1628;
+  --emerald:       #059669;
+  --emerald-light: #10b981;
+  --gold:          #C9961A;
+  --danger:        #dc2626;
+}
+```
+
+---
+
+## ✨ Features
+
+- **Dashboard** — KPI stat cards, weekly revenue/orders chart (Recharts), category donut, low-stock alerts panel
+- **Products** — TanStack Table with sort/filter, add/edit modal with Zod-validated form
+- **Orders** — Status-tracked order list, order detail modal, print receipt action
+- **Customers** — Patient profiles with purchase history
+- **Inventory** — Stock monitoring, expiry date alerts, drag-and-drop reordering (DnD Kit)
+- **Suppliers** — Supplier directory with payment terms, lead times, add supplier form
+- **Reports** — YoY revenue comparison chart, sales performance metrics
+- **Auth** — Login & Register pages
+- **Settings** — Pharmacy & account preferences
 
 ---
 
