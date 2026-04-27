@@ -78,16 +78,19 @@ const orders = [
 type OrderStatus = (typeof orders)[number]["status"];
 
 const statusStyles: Record<OrderStatus, string> = {
-  Completed: "bg-green-100 text-green-600",
-  Pending: "bg-yellow-100 text-yellow-600",
-  Cancelled: "bg-red-100 text-red-600",
-  Processing: "bg-blue-100 text-blue-600",
+  Completed:
+    "bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400",
+  Pending:
+    "bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400",
+  Cancelled: "bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400",
+  Processing:
+    "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400",
 };
 
 export function OrdersTable() {
   const router = useNavigate();
   return (
-    <div className="bg-white rounded-2xl shadow-sm p-4">
+    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-sm p-4">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <h3 className="font-semibold text-lg">Recent Orders</h3>
@@ -117,20 +120,24 @@ export function OrdersTable() {
           {orders.map((order) => (
             <TableRow key={order.id}>
               {/* Order ID */}
-              <TableCell className="font-medium">{order.id}</TableCell>
+              <TableCell className="font-medium text-gray-900 dark:text-gray-100">
+                {order.id}
+              </TableCell>
 
               {/* Customer */}
               <TableCell>
                 <div className="flex items-center gap-">
-                  <div className="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-sm font-semibold">
+                  <div className="w-9 h-9 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-sm font-semibold text-gray-900 dark:text-gray-100">
                     {order.initials}
                   </div>
-                  <span>{order.name}</span>
+                  <span className="text-gray-900 dark:text-gray-100">
+                    {order.name}
+                  </span>
                 </div>
               </TableCell>
 
               {/* Items */}
-              <TableCell>
+              <TableCell className="text-gray-900 dark:text-gray-100">
                 {order.items} {order.items === 1 ? "item" : "items"}
               </TableCell>
 

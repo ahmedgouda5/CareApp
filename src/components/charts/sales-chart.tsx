@@ -172,7 +172,7 @@ export function SalesChart({
   const gradientId = useId().replace(/:/g, "");
 
   return (
-    <Card className="rounded-xl bg-muted/50 shadow-sm">
+    <Card className="rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm">
       <CardHeader className="flex flex-col gap-4 pb-0 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-1">
           <CardTitle>{title}</CardTitle>

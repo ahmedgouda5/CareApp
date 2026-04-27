@@ -46,7 +46,7 @@ export function CategoryPie({
   data = categoryData,
 }: CategoryPieProps) {
   return (
-    <Card className="rounded-xl bg-muted/50 shadow-sm">
+    <Card className="rounded-xl bg-gray-50 dark:bg-gray-800 shadow-sm">
       <CardHeader className="pb-0">
         <CardTitle>{title}</CardTitle>
         <CardDescription>{subtitle}</CardDescription>

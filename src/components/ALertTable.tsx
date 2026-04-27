@@ -54,7 +54,7 @@ const statusStyles: Record<
 
 export function StockAlertTable() {
   return (
-    <div className="bg-white rounded-2xl shadow-sm w-full">
+    <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-sm w-full">
       {/* Header */}
       <div className="flex justify-between items-center p-4 border-b">
         <div className="flex items-center gap-2">
