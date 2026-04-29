@@ -7,8 +7,18 @@ import {
   TableRow,
 } from "../ui/table";
 import { Button } from "../ui/button";
+type Category = "Antibiotic" | "Antidiabetic" | "GI" | "Cardiac" | "Vitamin";
+type StockItem = {
+  name: string;
+  category: Category;
+  stock: number;
+  min: number;
+  level: "Critical" | "Low" | "Good" | "Excellent";
+  percent: number;
+  expiry: string;
+};
 
-const data = [
+const data: StockItem[] = [
   {
     name: "Amoxicillin 500mg",
     category: "Antibiotic",
@@ -78,15 +88,16 @@ export default function StockTable() {
     return "text-green-600";
   }
 
-  function getCategoryStyle(cat: string) {
-    const styles = {
+  function getCategoryStyle(cat: Category) {
+    const styles: Record<Category, string> = {
       Antibiotic: "bg-green-100 text-green-700",
       Antidiabetic: "bg-blue-100 text-blue-700",
       GI: "bg-pink-100 text-pink-700",
       Cardiac: "bg-red-100 text-red-700",
       Vitamin: "bg-purple-100 text-purple-700",
     };
-    return styles[cat] || "bg-gray-100";
+
+    return styles[cat];
   }
 
   return (
