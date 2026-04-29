@@ -5,7 +5,7 @@ import InputCustom from "../Shared/Components/InputCUstom";
 
 const Reports = () => {
   return (
-    <div className="p-6  min-h-screen">
+    <div className="">
       <nav className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
@@ -20,7 +20,7 @@ const Reports = () => {
           </p>
         </div>
 
-        <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto sm:justify-end">
+        <div className="hidden md:flex w-full flex-wrap items-center gap-3 sm:w-auto sm:justify-end">
           <InputCustom text="Export PDF" />
           <InputCustom text="Export Excel" />
         </div>

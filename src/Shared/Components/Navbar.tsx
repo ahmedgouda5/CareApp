@@ -18,19 +18,21 @@ const Navbar = () => {
     .find((item) => item.url === pathname);
 
   return (
-    <nav className="flex justify-between w-full  p-2 items-center bg-inherit ">
+    <nav className="flex  justify-between w-full  px-2 py-3 items-center ">
       <section className="p-4">
-        <h1 className="text-lg text-neutral-800 dark:text-neutral-200 font-bold">
+        <h1 className="text-sm md:text-lg text-neutral-800 dark:text-neutral-200 font-bold">
           {currentPage?.title}
         </h1>
-        <p className="text-xs text-neutral-600 dark:text-neutral-400">
+        <p className="text-[10px] md:text-xs   text-neutral-600 dark:text-neutral-400">
           {currentPage?.description}
         </p>
       </section>
       <section className="flex items-center gap-4">
-        <InputInline
-          data={{ placeholder: "Search...", buttonText: "Search" }}
-        />
+        <div className="hidden md:flex">
+          <InputInline
+            data={{ placeholder: "Search...", buttonText: "Search" }}
+          />
+        </div>
         <BellRing className="text-lg text-neutral-600 dark:text-neutral-400 cursor-pointer" />
         <ModeToggle />
       </section>

@@ -7,7 +7,6 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
@@ -19,20 +18,15 @@ import { Label } from "../ui/label";
 import {
   addProductSchema,
   categoryOptions,
-  statusOptions,
 } from "../../Schemas/Prodcut-Schema";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import type { AppDispatch, RootState } from "../../../store/store";
-import { AddProduct } from "../../../store/Slices/Product.slice";
+// import { useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
+// import type { AppDispatch, RootState } from "../../../store/store";
 import { useCallback, useState } from "react";
 
 type AddProductFormValues = z.infer<typeof addProductSchema>;
 
-export function AddingProductModel() {
-  const dispatch = useDispatch<AppDispatch>();
-  const Product = useSelector((state: RootState) => state.Product.Product);
-  console.log("from redux", Product);
+export function UpdateProductModel() {
   const [open, setOpen] = useState<boolean>(false);
 
   const {
@@ -44,18 +38,16 @@ export function AddingProductModel() {
     resolver: zodResolver(addProductSchema),
     defaultValues: {
       name: "",
-      description: "",
       sku: "",
       category: "Antibiotic",
       price: 0,
       stock: 0,
       expiry: "",
-      status: "In Stock",
     },
   });
 
   const onSubmit = useCallback((values: AddProductFormValues) => {
-    dispatch(AddProduct(values));
+    console.log("Update Product", values);
     reset();
     setOpen(false);
   }, []);
@@ -63,22 +55,18 @@ export function AddingProductModel() {
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button className="bg-linear-to-l from-green-400/80 to-green-900/90 text-white hover:from-green-500 hover:to-green-700 transition-all duration-300">
-          {" "}
-          Add Product
+        <Button size="icon" variant="outline">
+          ✏️
         </Button>
       </AlertDialogTrigger>
 
       <AlertDialogContent className="max-w-2xl">
         <AlertDialogHeader>
-          <AlertDialogTitle>Add Product</AlertDialogTitle>
-          <AlertDialogDescription>
-            Enter product details. Fields match the table columns.
-          </AlertDialogDescription>
+          <AlertDialogTitle>Edit Product</AlertDialogTitle>
         </AlertDialogHeader>
 
         <form
-          id="add-product-form"
+          id="edit-product-form"
           className="grid grid-cols-1 gap-3 sm:grid-cols-2"
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -91,20 +79,6 @@ export function AddingProductModel() {
             />
             {errors.name && (
               <p className="text-xs text-red-500">{errors.name.message}</p>
-            )}
-          </div>
-
-          <div className="space-y-1 sm:col-span-2">
-            <Label htmlFor="description">Description</Label>
-            <Input
-              id="description"
-              placeholder="Caps, Box of 30"
-              {...register("description")}
-            />
-            {errors.description && (
-              <p className="text-xs text-red-500">
-                {errors.description.message}
-              </p>
             )}
           </div>
 
@@ -149,7 +123,7 @@ export function AddingProductModel() {
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="stock">Stock</Label>
+            <Label htmlFor="stock"> Current Stock</Label>
             <Input
               id="stock"
               type="number"
@@ -168,35 +142,17 @@ export function AddingProductModel() {
               <p className="text-xs text-red-500">{errors.expiry.message}</p>
             )}
           </div>
-
-          <div className="space-y-1">
-            <Label htmlFor="status">Status</Label>
-            <select
-              id="status"
-              className="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 text-sm outline-none dark:bg-input/30"
-              {...register("status")}
-            >
-              {statusOptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-            {errors.status && (
-              <p className="text-xs text-red-500">{errors.status.message}</p>
-            )}
-          </div>
         </form>
 
         <AlertDialogFooter>
           <AlertDialogCancel disabled={isSubmitting}>Cancel</AlertDialogCancel>
           <Button
             type="submit"
-            form="add-product-form"
+            form="edit-product-form"
             disabled={isSubmitting}
             className="bg-linear-to-l from-green-400/80 to-green-900/90 text-white hover:from-green-500 hover:to-green-700 transition-all duration-300"
           >
-            {isSubmitting ? "Adding..." : "Add Product"}
+            {isSubmitting ? "Editing..." : "Edit Product"}
           </Button>
         </AlertDialogFooter>
       </AlertDialogContent>

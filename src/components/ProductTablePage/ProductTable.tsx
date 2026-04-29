@@ -23,6 +23,7 @@ import {
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import { AddingProductModel } from "./AddingModel";
+import { UpdateProductModel } from "./UpdateModel";
 
 export const schema = z.object({
   id: z.number(),
@@ -208,9 +209,7 @@ const columns: ColumnDef<Product>[] = [
     cell: () => (
       <div className="flex justify-center gap-2">
         <div className="flex gap-2">
-          <Button size="icon" variant="outline">
-            ✏️
-          </Button>
+          <UpdateProductModel />
           <Button size="icon" variant="outline">
             🗑️
           </Button>
@@ -259,9 +258,9 @@ export function ProductsTable() {
             ))}
           </TableHeader>
 
-          <TableBody>
+          <TableBody className="">
             {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id}>
+              <TableRow className="hover:bg-green-700/20" key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -281,10 +280,10 @@ export function ProductsTable() {
           </span>
 
           <div className="flex items-center gap-2">
-            <Button className="bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600">
+            <Button className="bg-linear-to-l from-green-400/80 to-green-900/90 text-white hover:from-green-500 hover:to-green-700 transition-all duration-300">
               Prev
             </Button>
-            <Button className="bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600">
+            <Button className="bg-linear-to-l from-green-400/80 to-green-900/90 text-white hover:from-green-500 hover:to-green-700 transition-all duration-300">
               Next
             </Button>
           </div>
