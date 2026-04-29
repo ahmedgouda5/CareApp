@@ -8,14 +8,23 @@ import {
 } from "../ui/table";
 import { Button } from "../ui/button";
 type Category = "Antibiotic" | "Antidiabetic" | "GI" | "Cardiac" | "Vitamin";
+type StockLevel = "Critical" | "Low" | "Good" | "Excellent";
 type StockItem = {
   name: string;
   category: Category;
   stock: number;
   min: number;
-  level: "Critical" | "Low" | "Good" | "Excellent";
+  level: StockLevel;
   percent: number;
   expiry: string;
+};
+
+const categoryStyles: Record<Category, string> = {
+  Antibiotic: "bg-green-100 text-green-700",
+  Antidiabetic: "bg-blue-100 text-blue-700",
+  GI: "bg-pink-100 text-pink-700",
+  Cardiac: "bg-red-100 text-red-700",
+  Vitamin: "bg-purple-100 text-purple-700",
 };
 
 const data: StockItem[] = [
@@ -76,28 +85,20 @@ const data: StockItem[] = [
 ];
 
 export default function StockTable() {
-  function getLevelColor(level: string) {
+  function getLevelColor(level: StockLevel) {
     if (level === "Critical") return "bg-red-500";
     if (level === "Low") return "bg-yellow-500";
     return "bg-green-500";
   }
 
-  function getTextColor(level: string) {
+  function getTextColor(level: StockLevel) {
     if (level === "Critical") return "text-red-500";
     if (level === "Low") return "text-yellow-600";
     return "text-green-600";
   }
 
   function getCategoryStyle(cat: Category) {
-    const styles: Record<Category, string> = {
-      Antibiotic: "bg-green-100 text-green-700",
-      Antidiabetic: "bg-blue-100 text-blue-700",
-      GI: "bg-pink-100 text-pink-700",
-      Cardiac: "bg-red-100 text-red-700",
-      Vitamin: "bg-purple-100 text-purple-700",
-    };
-
-    return styles[cat];
+    return categoryStyles[cat];
   }
 
   return (
