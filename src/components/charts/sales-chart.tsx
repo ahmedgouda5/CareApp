@@ -1,5 +1,6 @@
 "use client";
 
+import { memo, useId, useState } from "react";
 import {
   Area,
   AreaChart,
@@ -26,7 +27,6 @@ import {
   ChartTooltipContent,
 } from "../ui/chart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { useId, useState } from "react";
 
 type SalesRange = "7D" | "1M" | "1Y";
 
@@ -83,13 +83,13 @@ const chartConfig: ChartConfig = {
   },
 };
 
-function DotPoint(props: React.ComponentProps<typeof Dot>) {
+const DotPoint = memo(function DotPoint(props: React.ComponentProps<typeof Dot>) {
   return (
     <Dot r={3.5} strokeWidth={2} className="stroke-background" {...props} />
   );
-}
+});
 
-function SalesAreaChart({
+const SalesAreaChart = memo(function SalesAreaChart({
   data,
   gradientId,
 }: {
@@ -161,9 +161,9 @@ function SalesAreaChart({
       </ResponsiveContainer>
     </ChartContainer>
   );
-}
+});
 
-export function SalesChart({
+export const SalesChart = memo(function SalesChart({
   title = "Sales Analytics",
   subtitle = "Revenue & Orders - April 2026",
   data = defaultSalesData,
@@ -215,4 +215,4 @@ export function SalesChart({
       </CardFooter>
     </Card>
   );
-}
+});

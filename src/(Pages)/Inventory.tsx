@@ -1,7 +1,15 @@
-import ExpiryAlerts from "../components/InventoryApp/ExpiryAlerts";
-import InverntoryTable from "../components/InventoryApp/InverntoryTable";
-import StockByCategory from "../components/InventoryApp/StockByCategory";
-import StockTable from "../components/InventoryApp/StockTable";
+import { Suspense, lazy } from "react";
+import { DeferredSection } from "../components/DeferredSection";
+import { ChartSkeleton, TableSkeleton } from "../components/PerformanceFallbacks";
+
+const ExpiryAlerts = lazy(() => import("../components/InventoryApp/ExpiryAlerts"));
+const InverntoryTable = lazy(
+  () => import("../components/InventoryApp/InverntoryTable"),
+);
+const StockByCategory = lazy(
+  () => import("../components/InventoryApp/StockByCategory"),
+);
+const StockTable = lazy(() => import("../components/InventoryApp/StockTable"));
 
 const Inventory = () => {
   return (
@@ -18,17 +26,37 @@ const Inventory = () => {
         </div>
       </nav>
       <section>
-        <InverntoryTable />
+        <Suspense fallback={<TableSkeleton />}>
+          <InverntoryTable />
+        </Suspense>
       </section>
-      <section className="">
-        <StockTable />
-      </section>
+      <DeferredSection fallback={<TableSkeleton />} minHeightClassName="min-h-[280px]">
+        <section>
+          <Suspense fallback={<TableSkeleton />}>
+            <StockTable />
+          </Suspense>
+        </section>
+      </DeferredSection>
 
       {/* Right Side */}
-      <section className="flex flex-col md:flex-row gap-6">
-        <ExpiryAlerts />
-        <StockByCategory />
-      </section>
+      <DeferredSection
+        fallback={
+          <section className="flex flex-col md:flex-row gap-6">
+            <TableSkeleton />
+            <ChartSkeleton heightClass="h-[260px]" />
+          </section>
+        }
+        minHeightClassName="min-h-[620px] md:min-h-[320px]"
+      >
+        <section className="flex flex-col md:flex-row gap-6">
+          <Suspense fallback={<TableSkeleton />}>
+            <ExpiryAlerts />
+          </Suspense>
+          <Suspense fallback={<ChartSkeleton heightClass="h-[260px]" />}>
+            <StockByCategory />
+          </Suspense>
+        </section>
+      </DeferredSection>
     </main>
   );
 };

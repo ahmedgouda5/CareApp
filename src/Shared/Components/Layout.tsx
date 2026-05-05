@@ -6,6 +6,8 @@ import {
   SidebarTrigger,
 } from "../../components/ui/sidebar";
 import Navbar from "./Navbar";
+import { Suspense } from "react";
+import { DashboardPageSkeleton } from "../../components/PerformanceFallbacks";
 
 function Layout() {
   return (
@@ -18,7 +20,9 @@ function Layout() {
           <Navbar />
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 bg-gray-200 dark:bg-gray-900">
-          <Outlet />
+          <Suspense fallback={<DashboardPageSkeleton />}>
+            <Outlet />
+          </Suspense>
         </div>
       </SidebarInset>
     </SidebarProvider>

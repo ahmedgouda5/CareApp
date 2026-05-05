@@ -22,12 +22,12 @@ export default function CustomerPage() {
           </button>
         </div>
       </nav>
-      <section className="  dark:bg-gray-900 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-5 items-start">
-        <section className="h-[calc(100vh-3rem)] min-h-[480px]">
+      <section className=" dark:bg-gray-900  max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-5 items-start">
+        <section className="md:col-span-1">
           <CustomerTable selected={selected} onSelect={(c) => setSelected(c)} />
         </section>
 
-        <section className="flex flex-col gap-4">
+        <section className="flex flex-col gap-7 md:col-span-2 justify-between  h-full ">
           <CustomerDetail customer={selected} />
           <OrderHistory />
         </section>

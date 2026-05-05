@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import {
   DollarSign,
   Package,
@@ -6,11 +7,32 @@ import {
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
+import {
+  ChartSkeleton,
+  TableSkeleton,
+} from "../components/PerformanceFallbacks";
+import { DeferredSection } from "../components/DeferredSection";
 
-import { CategoryPie } from "../components/charts/category-pie";
-import { SalesChart } from "../components/charts/sales-chart";
-import { OrdersTable } from "../components/OrdersTable";
-import { StockAlertTable } from "../components/ALertTable";
+const CategoryPie = lazy(() =>
+  import("../components/charts/category-pie").then((module) => ({
+    default: module.CategoryPie,
+  })),
+);
+const SalesChart = lazy(() =>
+  import("../components/charts/sales-chart").then((module) => ({
+    default: module.SalesChart,
+  })),
+);
+const OrdersTable = lazy(() =>
+  import("../components/OrdersTable").then((module) => ({
+    default: module.OrdersTable,
+  })),
+);
+const StockAlertTable = lazy(() =>
+  import("../components/ALertTable").then((module) => ({
+    default: module.StockAlertTable,
+  })),
+);
 
 const Dashboard = () => {
   return (
@@ -109,16 +131,44 @@ const Dashboard = () => {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-        <SalesChart />
-        <CategoryPie />
-      </div>
+      <DeferredSection
+        fallback={
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <ChartSkeleton />
+            <ChartSkeleton heightClass="h-[320px]" />
+          </div>
+        }
+        minHeightClassName="min-h-[760px] md:min-h-[430px]"
+      >
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <Suspense fallback={<ChartSkeleton />}>
+            <SalesChart />
+          </Suspense>
+          <Suspense fallback={<ChartSkeleton heightClass="h-[320px]" />}>
+            <CategoryPie />
+          </Suspense>
+        </div>
+      </DeferredSection>
 
       {/* Tables */}
-      <div className="flex gap-2 flex-col md:flex-row">
-        <StockAlertTable />
-        <OrdersTable />
-      </div>
+      <DeferredSection
+        fallback={
+          <div className="flex gap-2 flex-col md:flex-row">
+            <TableSkeleton />
+            <TableSkeleton />
+          </div>
+        }
+        minHeightClassName="min-h-[700px] md:min-h-[420px]"
+      >
+        <div className="flex gap-2 flex-col md:flex-row">
+          <Suspense fallback={<TableSkeleton />}>
+            <StockAlertTable />
+          </Suspense>
+          <Suspense fallback={<TableSkeleton />}>
+            <OrdersTable />
+          </Suspense>
+        </div>
+      </DeferredSection>
     </div>
   );
 };

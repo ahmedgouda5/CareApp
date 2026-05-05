@@ -1,7 +1,22 @@
-import { ReportsCharts } from "../components/charts/ReportsCharts";
-import { SalesByCategory } from "../components/ReportsSalesForAnti";
-import TopProducts from "../components/TopProducts";
+import { Suspense, lazy } from "react";
 import InputCustom from "../Shared/Components/InputCUstom";
+import {
+  ChartSkeleton,
+  TableSkeleton,
+} from "../components/PerformanceFallbacks";
+import { DeferredSection } from "../components/DeferredSection";
+
+const ReportsCharts = lazy(() =>
+  import("../components/charts/ReportsCharts").then((module) => ({
+    default: module.ReportsCharts,
+  })),
+);
+const SalesByCategory = lazy(() =>
+  import("../components/ReportsSalesForAnti").then((module) => ({
+    default: module.SalesByCategory,
+  })),
+);
+const TopProducts = lazy(() => import("../components/TopProducts"));
 
 const Reports = () => {
   return (
@@ -84,18 +99,42 @@ const Reports = () => {
             <p className="text-sm text-emerald-500">↑ 18.2%</p>
           </div>
         </section>
-        <section className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
-          <div className="md:col-span-2 h-full">
-            <ReportsCharts />
-          </div>
-
-          <div className="h-full">
-            <TopProducts />
-          </div>
-        </section>
-        <section>
-          <SalesByCategory />
-        </section>
+        <DeferredSection
+          fallback={
+            <section className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
+              <div className="md:col-span-2 h-full">
+                <ChartSkeleton />
+              </div>
+              <div className="h-full">
+                <TableSkeleton />
+              </div>
+            </section>
+          }
+          minHeightClassName="min-h-[700px] md:min-h-[430px]"
+        >
+          <section className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-3 items-stretch">
+            <div className="md:col-span-2 h-full">
+              <Suspense fallback={<ChartSkeleton />}>
+                <ReportsCharts />
+              </Suspense>
+            </div>
+            <div className="h-full">
+              <Suspense fallback={<TableSkeleton />}>
+                <TopProducts />
+              </Suspense>
+            </div>
+          </section>
+        </DeferredSection>
+        <DeferredSection
+          fallback={<ChartSkeleton heightClass="h-[300px]" />}
+          minHeightClassName="min-h-[320px]"
+        >
+          <section>
+            <Suspense fallback={<ChartSkeleton heightClass="h-[300px]" />}>
+              <SalesByCategory />
+            </Suspense>
+          </section>
+        </DeferredSection>
       </main>
     </div>
   );

@@ -56,11 +56,6 @@ export const nav = {
       label: "System",
       items: [
         {
-          title: "Authentication",
-          url: "/Auth",
-          description: "Login & Register pages preview",
-        },
-        {
           title: "Settings",
           url: "/settings",
           description: "Account & pharmacy preferences",

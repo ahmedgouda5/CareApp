@@ -86,8 +86,10 @@ export function StockAlertTable() {
                 </div>
 
                 <div>
-                  <h4 className="font-medium">{alert.name}</h4>
-                  <p className={`text-sm ${style.text}`}>{alert.message}</p>
+                  <h4 className="font-medium text-sm text-gray-900">
+                    {alert.name}
+                  </h4>
+                  <p className={`text-xs ${style.text}`}>{alert.message}</p>
                 </div>
               </div>
 

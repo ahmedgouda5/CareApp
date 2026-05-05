@@ -1,9 +1,9 @@
-import { useMemo, useState } from "react";
+import { memo, useMemo, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import { customers } from "../../data/data";
 import type { Customer } from "./CustomerDetails";
 
-function CustomerTable({
+const CustomerTable = memo(function CustomerTable({
   selected,
   onSelect,
 }: {
@@ -23,7 +23,7 @@ function CustomerTable({
   );
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden h-full">
+    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden min-h-[60vh]">
       <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
         <div className="relative">
           <svg
@@ -108,6 +108,6 @@ function CustomerTable({
       </div>
     </div>
   );
-}
+});
 
 export default CustomerTable;

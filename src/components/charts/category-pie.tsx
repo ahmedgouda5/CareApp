@@ -1,4 +1,5 @@
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { memo } from "react";
+import { ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 import {
   Card,
@@ -40,7 +41,7 @@ const chartConfig: ChartConfig = {
   Other: { label: "Other", color: "#a855f7" },
 };
 
-export function CategoryPie({
+export const CategoryPie = memo(function CategoryPie({
   title = "Category Split",
   subtitle = "Product distribution by revenue share",
   data = categoryData,
@@ -90,4 +91,4 @@ export function CategoryPie({
       </CardContent>
     </Card>
   );
-}
+});
