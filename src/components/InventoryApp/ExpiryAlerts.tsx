@@ -18,7 +18,7 @@ export default function ExpiryAlerts() {
   ];
 
   return (
-    <div className="bg-white p-4 rounded-2xl w-full md:w-[50%] shadow">
+    <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-2xl w-full md:w-[50%] shadow">
       <h2 className="font-semibold mb-4">Expiry Alerts</h2>
 
       <div className="space-y-3">
@@ -32,13 +32,15 @@ export default function ExpiryAlerts() {
             }`}
           >
             <div className="flex justify-between items-center">
-              <p className="font-medium">{item.name}</p>
-              <span className="text-xs px-2 py-1 rounded bg-white">
+              <p className="font-medium text-gray-900 ">{item.name}</p>
+              <span className="text-xs px-2 py-1 rounded bg-white dark:bg-gray-800 dark:text-white">
                 {item.status}
               </span>
             </div>
 
-            <p className="text-sm text-gray-500">Expires in {item.days} days</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400">
+              Expires in {item.days} days
+            </p>
           </div>
         ))}
       </div>

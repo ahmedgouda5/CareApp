@@ -10,7 +10,7 @@ import {
 const InverntoryTable = () => {
   return (
     <div>
-      <div className="grid auto-rows-min gap-4 md:grid-cols-4">
+      <div className="grid auto-rows-min gap-4 md:grid-cols-4 ">
         {/* Revenue */}
         <div className="rounded-xl bg-gray-100 dark:bg-gray-800 p-4 border border-gray-200 dark:border-gray-700 shadow-sm border-t-4 border-t-emerald-500 dark:border-t-emerald-500">
           <div className="rounded-md bg-emerald-100 dark:bg-emerald-900/30 p-2 w-max">

@@ -102,7 +102,7 @@ export default function StockTable() {
   }
 
   return (
-    <section className="bg-white p-5 rounded-2xl shadow">
+    <section className="bg-gray-100 dark:bg-gray-800 p-5 rounded-2xl shadow">
       {/* Header */}
       <header className="flex justify-between items-center mb-4">
         <h2 className="font-semibold text-lg">Stock Levels</h2>

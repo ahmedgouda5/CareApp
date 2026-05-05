@@ -8,6 +8,7 @@ import Customers from "./(Pages)/Customers";
 import Suppliers from "./(Pages)/Suppliers";
 import Settings from "./(Pages)/Settings";
 import Reports from "./(Pages)/Reports";
+import Auth from "./(Pages)/Auth";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="suppliers" element={<Suppliers />} />
           <Route path="reports" element={<Reports />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="Auth" element={<Auth />} />
         </Route>
       </Routes>
     </BrowserRouter>

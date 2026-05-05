@@ -9,7 +9,7 @@ export default function StockByCategory() {
   const max = Math.max(...categories.map((c) => c.value));
 
   return (
-    <div className="bg-white p-4 w-full md:w-full rounded-2xl shadow">
+    <div className="bg-gray-100 dark:bg-gray-800 p-4 w-full md:w-full rounded-2xl shadow">
       <h2 className="font-semibold mb-4">Stock by Category</h2>
 
       <div className="space-y-4">

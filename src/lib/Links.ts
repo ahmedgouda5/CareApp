@@ -57,7 +57,7 @@ export const nav = {
       items: [
         {
           title: "Authentication",
-          url: "/authentication",
+          url: "/Auth",
           description: "Login & Register pages preview",
         },
         {
