@@ -12,12 +12,12 @@ function Layout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-gray-200 dark:bg-gray-900">
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 bg-gray-100 dark:bg-gray-900">
           <SidebarTrigger className="-ml-1" />
 
           <Navbar />
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 bg-gray-300 dark:bg-gray-900">
+        <div className="flex flex-1 flex-col gap-4 p-4 bg-gray-200 dark:bg-gray-900">
           <Outlet />
         </div>
       </SidebarInset>

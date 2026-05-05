@@ -8,10 +8,10 @@ export default function CustomerPage() {
   const [selected, setSelected] = useState(customers[0]);
 
   return (
-    <main className="min-h-screen bg-gray-100 dark:bg-gray-900 p-4 md:p-6">
+    <main className="min-h-screen  ">
       <nav className="flex justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold">Customer Management</h1>
+          <h1 className="font-bold">Customer Management</h1>
           <p className="text-gray-500">
             {customers.length} registered patients
           </p>
@@ -22,7 +22,7 @@ export default function CustomerPage() {
           </button>
         </div>
       </nav>
-      <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-5 items-start">
+      <section className="  dark:bg-gray-900 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-5 items-start">
         <section className="h-[calc(100vh-3rem)] min-h-[480px]">
           <CustomerTable selected={selected} onSelect={(c) => setSelected(c)} />
         </section>

@@ -5,7 +5,7 @@ import StockTable from "../components/InventoryApp/StockTable";
 
 const Inventory = () => {
   return (
-    <main className="p-6 space-y-6">
+    <main className=" space-y-6">
       <nav className="flex justify-between ">
         <div>
           <h1 className="text-xl font-semibold">Inventory & Stock Control</h1>

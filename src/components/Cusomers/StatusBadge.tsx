@@ -8,7 +8,9 @@ function StatusBadge({ status }: { status: string }) {
   const s = safeStatus(status);
 
   return (
-    <span className={statusCls[s]}>
+    <span
+      className={`${statusCls[s]} text-center items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold`}
+    >
       <span className={dotCls[s]} />
       {s}
     </span>

@@ -14,7 +14,7 @@ import { StockAlertTable } from "../components/ALertTable";
 
 const Dashboard = () => {
   return (
-    <div className="flex flex-1 flex-col gap-4 py-2 px-4">
+    <div className="flex flex-1 flex-col gap-4 ">
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
