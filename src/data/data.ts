@@ -102,6 +102,8 @@ export const orders = [
   },
 ];
 
+export type status = "Active" | "VIP" | "Inactive" | "Done";
+
 export const statusCls = {
   Active:
     "bg-green-100  text-green-700  dark:bg-green-900/40  dark:text-green-300",
