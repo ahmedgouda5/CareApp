@@ -24,7 +24,7 @@ export default function CustomerPage() {
       </nav>
       <section className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-[320px_1fr] gap-5 items-start">
         <section className="h-[calc(100vh-3rem)] min-h-[480px]">
-          <CustomerTable selected={selected} onSelect={setSelected} />
+          <CustomerTable selected={selected} onSelect={(c) => setSelected(c)} />
         </section>
 
         <section className="flex flex-col gap-4">

@@ -1,8 +1,15 @@
 import { useMemo, useState } from "react";
 import StatusBadge from "./StatusBadge";
 import { customers } from "../../data/data";
+import type { Customer } from "./CustomerDetails";
 
-function CustomerTable({ selected, onSelect }) {
+function CustomerTable({
+  selected,
+  onSelect,
+}: {
+  selected: Customer | null;
+  onSelect: (customer: Customer) => void;
+}) {
   const [query, setQuery] = useState("");
 
   const filtered = useMemo(

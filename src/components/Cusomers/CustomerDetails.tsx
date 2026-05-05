@@ -1,6 +1,16 @@
 import StatusBadge from "./StatusBadge";
+export interface Customer {
+  id: number;
+  name: string;
+  phone: string;
+  orders: number;
+  status: string;
+  avatarBg: string;
+  avatarText: string;
+  initials: string;
+}
 
-export default function CustomerDetail({ customer }) {
+export default function CustomerDetail({ customer }: { customer: Customer }) {
   if (!customer)
     return (
       <div className="bg-gray-100 dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 flex items-center justify-center p-10 text-sm text-gray-400">
