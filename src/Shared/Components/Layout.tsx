@@ -8,6 +8,7 @@ import {
 import Navbar from "./Navbar";
 import { Suspense } from "react";
 import { DashboardPageSkeleton } from "../../components/PerformanceFallbacks";
+import Chat from "../../components/Ai_chat/Chat";
 
 function Layout() {
   return (
@@ -23,6 +24,9 @@ function Layout() {
           <Suspense fallback={<DashboardPageSkeleton />}>
             <Outlet />
           </Suspense>
+          <div className="fixed bottom-4 right-4">
+            <Chat />
+          </div>
         </div>
       </SidebarInset>
     </SidebarProvider>

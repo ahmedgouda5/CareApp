@@ -1,7 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { nav } from "../../lib/Links";
 import { InputInline } from "./Input";
-import { BellRing } from "lucide-react";
+import { BellRing, Sparkles } from "lucide-react";
 import { ModeToggle } from "../../components/Model-toggle";
 
 interface NavItem {
@@ -34,6 +34,15 @@ const Navbar = () => {
           />
         </div>
         <BellRing className="text-lg text-neutral-600 dark:text-neutral-400 cursor-pointer" />
+        <Link
+          to="/auth/login"
+          className="inline-flex items-center gap-2 rounded-full border border-purple-500/30 bg-gradient-to-r from-gray-900 to-purple-700 px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition hover:from-gray-800 hover:to-purple-600 sm:px-4 sm:py-2 sm:text-sm"
+        >
+          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-400/20 text-emerald-300 ring-1 ring-emerald-300/40">
+            <Sparkles className="h-3.5 w-3.5" />
+          </span>
+          Login
+        </Link>
         <ModeToggle />
       </section>
     </nav>

@@ -2,7 +2,7 @@ import { Skeleton } from "./ui/skeleton";
 
 export function GenericPageSkeleton() {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 bg-gray-100 dark:bg-gray-800">
       <Skeleton className="h-8 w-64" />
       <Skeleton className="h-32 w-full" />
       <Skeleton className="h-64 w-full" />
@@ -10,10 +10,14 @@ export function GenericPageSkeleton() {
   );
 }
 
-export function ChartSkeleton({ heightClass = "h-[400px]" }: { heightClass?: string }) {
+export function ChartSkeleton({
+  heightClass = "h-[400px]",
+}: {
+  heightClass?: string;
+}) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
-      <div className="space-y-2">
+    <div className="rounded-xl border border-gray-200 bg-gray-100 p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+      <div className="space-y-2 bg-gray-100 dark:bg-gray-800">
         <Skeleton className="h-6 w-56" />
         <Skeleton className="h-4 w-40" />
       </div>
@@ -41,22 +45,22 @@ export function TableSkeleton() {
 
 export function DashboardPageSkeleton() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 bg-gray-100 dark:bg-gray-800">
       <div className="space-y-2">
         <Skeleton className="h-8 w-72" />
         <Skeleton className="h-5 w-80" />
       </div>
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-4 bg-gray-100 dark:bg-gray-800">
         <Skeleton className="h-36 w-full" />
         <Skeleton className="h-36 w-full" />
         <Skeleton className="h-36 w-full" />
         <Skeleton className="h-36 w-full" />
       </div>
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2 bg-gray-100 dark:bg-gray-800">
         <ChartSkeleton />
         <ChartSkeleton heightClass="h-[320px]" />
       </div>
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 bg-gray-100 dark:bg-gray-800">
         <TableSkeleton />
         <TableSkeleton />
       </div>
